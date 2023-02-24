@@ -1,0 +1,718 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico"><title>tsconfig - 输入文件/类型文件加载配置</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="81271a41-b8e3-4e34-93df-22e565d2e3ea" class="page serif"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb" style="object-position:center 48.4%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🙉</span></div><h1 class="page-title">tsconfig - 输入文件/类型文件加载配置</h1></header><div class="page-body"><ul id="6b6c849d-0e8f-4d2a-9756-16cc3ce50fbc" class="toggle"><li><details open=""><summary>CATALOG</summary><nav id="b4a2e83a-7662-4ccd-adab-866043353953" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#187bd76b-b4bc-4e4c-95b3-f244148370d8">指定输入文件</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1fa9b32b-5cce-45dd-ba02-3e439e53f2a8">Details</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a38eeed5-68ab-4d97-b42f-e4f2e0414ffb"><code><strong><strong>@types</strong></strong></code><strong><strong>，</strong></strong><code><strong><strong>typeRoots</strong></strong></code><strong><strong>和</strong></strong><code><strong><strong>types</strong></strong></code></a></div></nav></details></li></ul><h3 id="187bd76b-b4bc-4e4c-95b3-f244148370d8" class="">指定输入文件</h3><p id="e54cb862-398f-480b-a16a-165fd6a5a49d" class="">
+</p><p id="ba526b81-ce5c-45ae-916a-69377a6a146b" class=""><strong>Example: </strong>使用 <code>&quot;files&quot;</code> 属性 </p><pre id="edcfb74f-060e-441a-a525-1010d8e8feff" class="code"><code>// tsconfig.json
+{
+    &quot;compilerOptions&quot;: {
+        &quot;module&quot;: &quot;commonjs&quot;,
+        &quot;noImplicitAny&quot;: true,
+        &quot;removeComments&quot;: true,
+        &quot;preserveConstEnums&quot;: true,
+        &quot;sourceMap&quot;: true
+    },
+    &quot;files&quot;: [
+        &quot;core.ts&quot;,
+        &quot;scanner.ts&quot;,
+        &quot;parser.ts&quot;,
+    ]
+}</code></pre><p id="c3c847ff-1eb3-4897-8c66-7f5786111ac5" class=""><strong>Example: </strong>使用 <code>&quot;include&quot;</code> 和 <code>&quot;exclude&quot;</code> 属性</p><pre id="6d46a3d6-f8b1-43be-8d77-3d16689222d0" class="code"><code>{
+    &quot;compilerOptions&quot;: {
+		// ...
+    },
+    &quot;include&quot;: [
+        &quot;src/**/*&quot;
+    ],
+    &quot;exclude&quot;: [
+        &quot;node_modules&quot;,
+        &quot;**/*.spec.ts&quot;
+    ]
+}</code></pre><h3 id="1fa9b32b-5cce-45dd-ba02-3e439e53f2a8" class="">Details</h3><ul id="63a684c8-23ee-43d2-b911-99233e127cc2" class="bulleted-list"><li style="list-style-type:disc"><code>&quot;files&quot;</code> 指定一个包含相对或绝对文件路径的列表。</li></ul><ul id="06df7e6c-db66-401e-87e8-0ac9ed11022d" class="bulleted-list"><li style="list-style-type:disc"><code>&quot;include&quot;</code> 和 <code>&quot;exclude&quot;</code> 属性指定一个文件glob匹配模式列表。<ul id="467fdb74-4b1c-4b36-8a4b-464feae4bfee" class="bulleted-list"><li style="list-style-type:circle"><code>*</code> 匹配0或多个字符（不包括目录分隔符）</li></ul><ul id="33102db9-8933-4a81-8e1a-135164b4bba9" class="bulleted-list"><li style="list-style-type:circle"><code>?</code> 匹配一个任意字符（不包括目录分隔符）</li></ul><ul id="d4455cf5-56c3-4109-83d7-fd046bb56171" class="bulleted-list"><li style="list-style-type:circle"><code>**/</code> 递归匹配任意子目录</li></ul><hr id="f0403576-a6eb-4c3b-be5f-9e23e4b4fe19"/><ul id="2445d176-32d4-49c6-b191-a0450edf485f" class="bulleted-list"><li style="list-style-type:circle">一个glob模式里的某部分只包含<code>*</code> 或 <code>.*</code><ul id="49216803-9cab-46ce-8765-6c8345220b25" class="bulleted-list"><li style="list-style-type:square">仅包含<mark class="highlight-red">有支持</mark>扩展名类型的文件</li></ul><ul id="796ab3a5-5649-4b4e-94ec-8750c1d48ec3" class="bulleted-list"><li style="list-style-type:square">默认<code>.ts</code>，<code>.tsx</code>，和<code>.d.ts</code></li></ul><ul id="daed97f0-691b-4c4f-896c-78dc9bb9ffe8" class="bulleted-list"><li style="list-style-type:square">如果 <code>allowJs: true</code> 还包含 <code>.js</code> 和 <code>.jsx</code></li></ul></li></ul></li></ul><ul id="8ec69c38-ced3-4c34-ac0e-ae0c9fad92df" class="bulleted-list"><li style="list-style-type:disc"><code>&quot;files&quot;</code> 和 <code>&quot;include&quot;</code> 都没有被指定<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="45f61359-b111-4f63-b622-0accaa57427c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">编译器默认包含当前目录和子目录下所有的TypeScript文件（.ts, .d.ts 和 .tsx），
+排除在 <code>exclude</code> 里指定的文件。
+若 <code>allowJs: true</code> JS文件（.js和.jsx）也被包含进来</div></figure></li></ul><ul id="cc055848-8fa9-49c5-8f9f-80fec5365072" class="bulleted-list"><li style="list-style-type:disc"><code>&quot;files&quot;</code> 和 <code>&quot;include&quot;</code> 都被指定<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6be0dbc5-fec0-4843-af02-b53ccd074603"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">编译器会将它们结合一并包含进来。 
+使用 <code>outDir</code>指定的目录下的文件永远会<mark class="highlight-red">被编译器排除</mark>，
+<em><strong>除非你明确地使用&quot;files&quot;将其包含进来（这时就算用exclude指定也没用）</strong></em></div></figure></li></ul><ul id="963c0ba4-8a2e-4e05-8354-92aa09b62276" class="bulleted-list"><li style="list-style-type:disc">使用<code>&quot;include&quot;</code>引入的文件可以使用<code>&quot;exclude&quot;</code>属性过滤</li></ul><ul id="1997e534-1df7-42c5-8b7d-8b30c68e6404" class="bulleted-list"><li style="list-style-type:disc">通过 <code>&quot;files&quot;</code>属性明确指定的文件却总是会被包含在内，不管<code>&quot;exclude&quot;</code>如何设置</li></ul><ul id="614de74f-33a0-4209-9bce-5b85c78a4080" class="bulleted-list"><li style="list-style-type:disc">如果没有特殊指定， <code>&quot;exclude&quot;</code>默认情况下会排除<p id="4252893b-636b-412c-9987-259325259256" class=""><code>node_modules</code>，<code>bower_components</code>，<code>jspm_packages</code>和<code>&lt;outDir&gt;</code>目录。</p></li></ul><ul id="4670c1b8-d539-41b1-af1f-8f990e3f3e93" class="bulleted-list"><li style="list-style-type:disc">任何被<code>&quot;files&quot;</code>或<code>&quot;include&quot;</code>指定的文件所引用的文件也会被包含进来。<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="96c79651-a0d6-4bd6-a1d6-d4cc97c284ee"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><code>A.ts</code>引用了<code>B.ts</code>，因此<code>B.ts</code>不能被排除。
+除非引用它的<code>A.ts</code>在<code>&quot;exclude&quot;</code>列表中。</div></figure></li></ul><h3 id="a38eeed5-68ab-4d97-b42f-e4f2e0414ffb" class=""><code><strong><strong>@types</strong></strong></code><strong><strong>，</strong></strong><code><strong><strong>typeRoots</strong></strong></code><strong><strong>和</strong></strong><code><strong><strong>types</strong></strong></code></h3><p id="524540f7-b3ab-4a67-917c-cfdf7a315094" class="">默认所有<em>可见的 </em><code>@types</code> 包会在编译过程中被包含进来。 <code>node_modules/@types</code>文件夹下以及它们子文件夹下的所有包都是<em>可见的</em>； 也就是说，</p><ul id="21014e99-2333-4f89-8b87-5be6306138ea" class="bulleted-list"><li style="list-style-type:disc"><code>./node_modules/@types/</code></li></ul><ul id="d9b00a29-2cb4-40ea-99d4-c694a0d26b78" class="bulleted-list"><li style="list-style-type:disc"><code>../node_modules/@types/</code></li></ul><ul id="b20960f7-99b3-488a-94d5-a43253173007" class="bulleted-list"><li style="list-style-type:disc"><code>../../node_modules/@types/</code>等等。</li></ul><hr id="b38d7d22-ce6f-4e69-bafd-0f5a3a1f5829"/><p id="b6dce3c3-5b6e-4e88-88c6-713d239a7397" class="">如果指定了<code>typeRoots</code>，<em>只有</em><code>typeRoots</code>下面的包才会被包含进来。 比如：</p><pre id="3bdaeb7c-e2a2-40a4-a646-3c307bd28120" class="code code-wrap"><code>{
+   &quot;compilerOptions&quot;: {
+       &quot;typeRoots&quot; : [&quot;./typings&quot;]
+   }
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="92c0efb9-1578-45d9-b84f-b5e3fcbe65bd"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">这个配置文件会包含<em>所有</em><code>./typings</code>下面的包，
+而不包含<code>./node_modules/@types</code>里面的包。</div></figure><hr id="0e7e8205-3a7f-4a59-811e-8cff220bf7b0"/><p id="e30cea31-0e08-4e2f-b206-7b7e34175ec8" class="">如果指定了<code>types</code>，只有被列出来的包才会被包含进来。 比如：</p><pre id="380201e2-838d-4c74-a387-0c80d7f2907a" class="code code-wrap"><code>{
+   &quot;compilerOptions&quot;: {
+        &quot;types&quot; : [&quot;node&quot;, &quot;lodash&quot;, &quot;express&quot;]
+   }
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4f4e0b88-00f2-4b65-8b22-c85101f40ad8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">这个<code>tsconfig.json</code>文件将<em>仅会</em>包含 
+- <code>./node_modules/@types/node</code>
+- <code>./node_modules/@types/lodash
+</code>- <code>./node_modules/@types/express</code>。
+<code>node_modules/@types/*</code>里面的其它包<mark class="highlight-red">不会</mark>被引入进来。
+
+<em><strong>指定</strong></em><em><strong><code>&quot;types&quot;: []</code></strong></em><em><strong> 来禁用自动引入</strong></em><em><strong><code>@types</code></strong></em><em><strong>包。</strong></em>
+自动引入只在你使用了全局的声明（相反于模块）时是重要的。 
+如果你使用 <code>import &quot;foo&quot;</code>语句，TypeScript仍然会查找<code>node_modules</code>和<code>node_modules/@types</code>文件夹来获取<code>foo</code>包。</div></figure><p id="95b20fae-3a23-45a3-9d00-f8ddb9d0a916" class="">
+</p></div></article></body></html>
