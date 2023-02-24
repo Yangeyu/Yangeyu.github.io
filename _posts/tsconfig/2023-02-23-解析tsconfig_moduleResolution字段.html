@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico"><title>tsconfig.json - moduleResolution</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d9d1ce60-244d-49e8-8ec1-962833d37918" class="page serif"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-4.0.3&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb" style="object-position:center 100%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">💡</span></div><h1 class="page-title">tsconfig.json - moduleResolution</h1></header><div class="page-body"><h2 id="8b2bd7f6-670e-467f-8c53-23d68b629eed" class="">Overview</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a51819ba-23ec-4283-9a56-312731ce7d7c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><em>模块解析：</em>是指编译器在查找导入模块内容时所遵循的流程
+<em>模块解析 </em>两种策略：<a href="https://www.tslang.cn/docs/handbook/module-resolution.html#node">Node</a> 和 <a href="https://www.tslang.cn/docs/handbook/module-resolution.html#classic">Classic</a></div></figure><p id="925c1856-2a7b-42bd-92ee-6ce34f0fbbb4" class="">可以使用 <code>--moduleResolution</code> 标记来指定使用哪种模块解析策略。若未指定，那么在使用了</p><p id="4a90fa81-3432-4cb2-9eea-70d415eda654" class=""> <code>--module AMD | System | ES2015</code> 时的默认值为 <a href="https://www.tslang.cn/docs/handbook/module-resolution.html#classic">Classic</a> ，其它情况时则为 <a href="https://www.tslang.cn/docs/handbook/module-resolution.html#node">Node</a> 。</p><h2 id="6320809b-7bbe-4497-a0e1-098101caf428" class="">Classic 策略</h2><hr id="ac7a2552-aa34-4d42-aeae-cfbd40411ed7"/><h3 id="97af39ee-8f2c-4d34-bb48-f8c39a984612" class="">相对模块导入</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0bf57cc1-655c-4006-9a7a-dbda4a0e60e7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">相对导入的模块是相对于导入它的文件进行解析的</div></figure><p id="64e3cdf8-8ad7-4bb9-bcb6-f4644e96bcfb" class=""><strong>Example: </strong><code><strong>/root/src/folder/A.ts</strong></code></p><pre id="b09327e1-ca87-4110-9b04-69f2ac7dd8ee" class="code"><code>import { b } from &quot;./moduleB&quot;</code></pre><ul id="23e62119-211b-4034-a2e0-660b79301fb4" class="toggle"><li><details open=""><summary><em><strong>查找流程</strong></em>：</summary><ol type="1" id="3657ec86-c917-4672-b4d5-a9b653d09a96" class="numbered-list" start="1"><li><code>/root/src/folder/moduleB.ts</code></li></ol><ol type="1" id="0b03e8e1-d66d-4a7d-b83d-f9a23cbda6ec" class="numbered-list" start="2"><li><code>/root/src/folder/moduleB.d.ts</code></li></ol></details></li></ul><h3 id="e8f9b08e-258d-4dbe-b009-913f98ad117f" class="">非相对模块的导入</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="796dd9d8-5f2c-4356-b918-375d492d5fe2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">编译器则会从包含导入文件的目录开始依次向上级目录遍历，尝试定位匹配的声明文件</div></figure><p id="1423e5b6-4371-4b19-afd5-f5f77d643c92" class=""><strong>Example: </strong><code><strong>/root/src/folder/A.ts</strong></code></p><pre id="cc542aab-92f7-48b8-9141-ff7d820b9ae7" class="code"><code>import { b } from &quot;moduleB&quot;</code></pre><ul id="f5d00e2c-27ef-4269-acdc-8c61a70c9743" class="toggle"><li><details open=""><summary><em><strong>查找流程</strong></em></summary><ol type="1" id="517c8e24-cae8-46da-81f0-a9866411db33" class="numbered-list" start="1"><li><code>/root/src/folder/moduleB.ts</code></li></ol><ol type="1" id="c46d4d52-6ab1-4b33-a298-28303506b8b4" class="numbered-list" start="2"><li><code>/root/src/folder/moduleB.d.ts</code></li></ol><ol type="1" id="03f64d15-0aab-4726-9e17-0a3c6bda354b" class="numbered-list" start="3"><li><code>/root/src/moduleB.ts</code></li></ol><ol type="1" id="2dccc900-139b-45bd-bcb1-8736684cea9f" class="numbered-list" start="4"><li><code>/root/src/moduleB.d.ts</code></li></ol><ol type="1" id="b57ee899-fe97-44ad-acaa-6b0856144737" class="numbered-list" start="5"><li><code>/root/moduleB.ts</code></li></ol><ol type="1" id="10450f76-6faa-4caf-b806-a1425bdedc71" class="numbered-list" start="6"><li><code>/root/moduleB.d.ts</code></li></ol><ol type="1" id="b11b7689-8337-4a7e-b8ec-fc22499f6315" class="numbered-list" start="7"><li><code>/moduleB.ts</code></li></ol><ol type="1" id="985ae64d-f12a-4213-9b5e-3b062a35761e" class="numbered-list" start="8"><li><code>/moduleB.d.ts</code></li></ol></details></li></ul><h2 id="bab54896-6232-4157-a21a-eb1a17b57300" class="">Node 策略</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7ee78a45-0de2-4920-b7ae-4fccfe477de2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">这个解析策略试图在运行时<mark class="highlight-red">模仿</mark><a href="https://nodejs.org/">Node.js</a>模块解析机制</div></figure><h3 id="131f59af-7ca0-4344-b906-6cd9c65a563f" class="">Node.js解析模块</h3><hr id="c6172291-1fb8-4524-973f-f8b7d824d1a3"/><h3 id="edb814a5-ed85-4ce7-8610-6a2899dafcf6" class="">相对模块解析</h3><p id="82ca79f0-9235-400d-b27c-21810db26c96" class=""><strong>Example: </strong><code><strong>/root/src/moduleA.js</strong></code></p><pre id="2549a3e9-a2ca-412a-90e6-0f68a5af7713" class="code"><code>var x = require(&quot;./moduleB&quot;);</code></pre><ul id="2aa2613d-573c-413b-b3f8-5b0035366876" class="toggle"><li><details open=""><summary><em><strong>查找流程</strong></em></summary><ol type="1" id="b8e14b21-491c-41d1-95d9-e0d6e807ba46" class="numbered-list" start="1"><li>检查<code>/root/src/moduleB.js</code>文件是否存在。</li></ol><ol type="1" id="c5134968-e4cc-456f-a5e4-61977cde323b" class="numbered-list" start="2"><li>检查<code>/root/src/moduleB</code>目录是否包含一个<code>package.json</code>文件，且<code>package.json</code>文件指定了一个<code>&quot;main&quot;</code>模块。<ul id="d10970d6-09c2-4f7e-a418-45f1adb22e6c" class="bulleted-list"><li style="list-style-type:disc"><code>/root/src/moduleB/package.json</code> 包含 <code>{ &quot;main&quot;: &quot;lib/mainModule.js&quot; }</code> </li></ul><ul id="08099a90-c410-4fa6-98b8-8ec0436e0548" class="bulleted-list"><li style="list-style-type:disc">Node.js会引用<code>/root/src/moduleB/lib/mainModule.js</code>。</li></ul></li></ol><ol type="1" id="264acd16-7c4d-4191-aea6-376e5f2b5026" class="numbered-list" start="3"><li>检查<code>/root/src/moduleB</code>目录是否包含一个<code>index.js</code>文件。 这个文件会被<mark class="highlight-red"><span style="border-bottom:0.05em solid">隐式</span></mark>地当作那个文件夹下的&quot;main&quot;模块。</li></ol></details></li></ul><h3 id="f0e0cef8-eef4-4ed3-87a4-d7ff2368e06a" class="">非相对模块解析</h3><p id="6e1ef837-b0a0-4707-b0b2-05241580ec08" class=""><strong>Example: </strong><code><strong>/root/src/moduleA.js</strong></code></p><pre id="80686cf1-f1fa-49a0-b39f-1776eb3b2885" class="code"><code>var x = require(&quot;moduleB&quot;);</code></pre><ul id="3fe232ff-3bbc-4d4c-a24d-efa392bee597" class="toggle"><li><details open=""><summary><em><strong>查找流程</strong></em></summary><ol type="1" id="9cdbd5f9-3586-49ff-b525-f10fa466577c" class="numbered-list" start="1"><li><code>/root/src/node_modules/moduleB.js</code></li></ol><ol type="1" id="60375c46-c0a5-4cac-849b-1338d158fc20" class="numbered-list" start="2"><li><code>/root/src/node_modules/moduleB/package.json</code> (如果指定了<code>&quot;main&quot;</code>属性)</li></ol><ol type="1" id="0c1358b1-b52a-4d52-84c8-7af2faace403" class="numbered-list" start="3"><li><code>/root/src/node_modules/moduleB/index.js</code></li></ol><hr id="6e58ac4c-bab6-40df-9cb1-4a7ccfc636ba"/><ol type="1" id="257a5556-fa39-4853-bfd2-f016a7451c7d" class="numbered-list" start="4"><li><code>/root/node_modules/moduleB.js</code></li></ol><ol type="1" id="778f876d-4234-476f-958d-3ef3c94187e8" class="numbered-list" start="5"><li><code>/root/node_modules/moduleB/package.json</code> (如果指定了<code>&quot;main&quot;</code>属性)</li></ol><ol type="1" id="f72f6768-489e-49a5-a49d-36c2829bddff" class="numbered-list" start="6"><li><code>/root/node_modules/moduleB/index.js</code></li></ol><hr id="8de540e7-27e8-4b4d-bb8c-c8e2018b074a"/><ol type="1" id="8675306d-b2d2-4b05-8a36-a92d1f0ab693" class="numbered-list" start="7"><li><code>/node_modules/moduleB.js</code></li></ol><ol type="1" id="550c448d-84fe-495a-a2cd-0ed7e83eb445" class="numbered-list" start="8"><li><code>/node_modules/moduleB/package.json</code> (如果指定了<code>&quot;main&quot;</code>属性)</li></ol><ol type="1" id="e2eb9176-ec7f-46a6-9ce9-b19ed39443e4" class="numbered-list" start="9"><li><code>/node_modules/moduleB/index.js</code></li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8623d6fc-ffa0-41b9-9ce2-ac301df66691"><div style="font-size:1.5em"><span class="icon">❗</span></div><div style="width:100%">Node.js在步骤（4）和（7）会向上跳一级目录。</div></figure></details></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0411b2e6-2836-4002-97ee-e416e05cc51b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Node.js先查找<code>moduleB.js</code>文件，然后是合适的<code>package.json</code>，再之后是<code>index.js</code></div></figure><h3 id="49f88f23-baac-4e6d-bb94-9ac527130ecf" class="">TypeScript解析模块</h3><p id="2bacce9b-8457-4984-9802-a0dbb58642ff" class=""><em>TypeScript是模仿Node.js运行时的解析策略来在编译阶段定位模块定义文件</em>。 因此TypeScript在Node解析逻辑基础上增加了</p><ul id="a2482595-244f-43b8-8184-0670efe1ac94" class="bulleted-list"><li style="list-style-type:disc">TypeScript源文件的扩展名( <code>.ts</code> , <code>.tsx</code>和<code>.d.ts</code> )。 </li></ul><ul id="48e6cab2-707b-4d9e-9008-db0916cffaaa" class="bulleted-list"><li style="list-style-type:disc">TypeScript在 <code>package.json</code> 里使用字段<code>&quot;types&quot;</code> 来表示类似<code>&quot;main&quot;</code> 的意义 - 编译器会使用它来找到要使用的&quot;main&quot;定义文件。</li></ul><hr id="7aa303e7-f937-4025-8f10-6bb773c93897"/><h3 id="cafef4fa-4866-4571-84f7-3eb5f212edf5" class="">相对模块导入</h3><p id="1992cf55-6bb7-4b8b-b884-26fec34315db" class=""><strong>Example: </strong><code><strong>/root/src/moduleA.js</strong></code></p><pre id="68c5ccfa-6024-4926-8f45-4f7ffa1a2161" class="code"><code>import { b } from &quot;./moduleB&quot;</code></pre><ul id="818de35d-31fe-45ac-8960-aabcb85b2d5c" class="toggle"><li><details open=""><summary><em><strong>查找流程</strong></em></summary><ol type="1" id="cc396701-4c2e-4aa2-8670-31185d3ce7d0" class="numbered-list" start="1"><li><code>/root/src/moduleB.ts</code></li></ol><ol type="1" id="5ccc6412-f9b2-48f2-981e-6fb57b694759" class="numbered-list" start="2"><li><code>/root/src/moduleB.tsx</code></li></ol><ol type="1" id="913b7e19-14f2-4411-b5b1-42349ef7fd3a" class="numbered-list" start="3"><li><code>/root/src/moduleB.d.ts</code></li></ol><ol type="1" id="9fcad1ff-0782-4eee-8097-bfb95c0d0fc5" class="numbered-list" start="4"><li><code>/root/src/moduleB/package.json</code> (如果指定了<code>&quot;types&quot;</code>属性)</li></ol><ol type="1" id="9157d4b1-8e5d-41d0-b01f-bf63313357f2" class="numbered-list" start="5"><li><code>/root/src/moduleB/index.ts</code></li></ol><ol type="1" id="fd0a387b-de57-4a92-933e-f8820ff73635" class="numbered-list" start="6"><li><code>/root/src/moduleB/index.tsx</code></li></ol><ol type="1" id="64c7419c-b0af-4635-a501-682b1e32e579" class="numbered-list" start="7"><li><code>/root/src/moduleB/index.d.ts</code></li></ol></details></li></ul><h3 id="ce6c5755-6a3f-402b-b8fe-5361083c2ce2" class="">非相对模块解析</h3><p id="30773e8b-7e84-44c3-81b2-958426a76129" class=""><strong>Example: </strong><code><strong>/root/src/moduleA.js</strong></code></p><pre id="3b83ee67-2ce0-4050-8eb9-8aeb746fe465" class="code"><code>var x = require(&quot;moduleB&quot;);</code></pre><ul id="6542c80a-e31c-418b-a681-e227b1efea72" class="toggle"><li><details open=""><summary><em><strong>查找流程</strong></em></summary><ol type="1" id="6d0637b9-2753-4857-bc3f-2b514e14f749" class="numbered-list" start="1"><li><code>/root/src/node_modules/moduleB.ts</code></li></ol><ol type="1" id="35f9ca5f-2b82-4481-9814-8d49fc85fde7" class="numbered-list" start="2"><li><code>/root/src/node_modules/moduleB.tsx</code></li></ol><ol type="1" id="9c371b7f-e9c5-4f13-9653-cab6a7c92138" class="numbered-list" start="3"><li><code>/root/src/node_modules/moduleB.d.ts</code></li></ol><ol type="1" id="c54bb123-e7d8-4b9b-bfba-02ec54291b2e" class="numbered-list" start="4"><li><code>/root/src/node_modules/moduleB/package.json</code> (如果指定了<code>&quot;types&quot;</code>属性)</li></ol><ol type="1" id="f323eb88-4b0f-4a3b-94cc-77e38b464619" class="numbered-list" start="5"><li><code>/root/src/node_modules/moduleB/index.ts</code></li></ol><ol type="1" id="eca9edf6-184b-464f-bde6-b484196343bc" class="numbered-list" start="6"><li><code>/root/src/node_modules/moduleB/index.tsx</code></li></ol><ol type="1" id="901f8440-29e2-4e92-ba2c-7f7655641569" class="numbered-list" start="7"><li><code>/root/src/node_modules/moduleB/index.d.ts</code></li></ol><hr id="e56029a7-dd8d-4adc-8656-c0d424f611f1"/><ol type="1" id="09401a60-e7fb-4771-b082-6ca278567765" class="numbered-list" start="8"><li> <code>/root/node_modules/moduleB.ts</code></li></ol><ol type="1" id="c5b455f0-6d13-4df0-bd1d-3f48f90ad6ef" class="numbered-list" start="9"><li><code>/root/node_modules/moduleB.tsx</code></li></ol><ol type="1" id="acc807dd-f279-4403-932a-01c138e95256" class="numbered-list" start="10"><li><code>/root/node_modules/moduleB.d.ts</code></li></ol><ol type="1" id="d5c54e33-eb5a-42b6-93c1-0af7cbafe609" class="numbered-list" start="11"><li><code>/root/node_modules/moduleB/package.json</code> (如果指定了<code>&quot;types&quot;</code>属性)</li></ol><ol type="1" id="b7ad1620-35a2-45c2-a9b4-a9f518c7969b" class="numbered-list" start="12"><li><code>/root/node_modules/moduleB/index.ts</code></li></ol><ol type="1" id="ae15c763-ddd9-4b6b-b185-a5beca33ed67" class="numbered-list" start="13"><li><code>/root/node_modules/moduleB/index.tsx</code></li></ol><ol type="1" id="93aac767-6e86-4519-8c78-fa145e3d1018" class="numbered-list" start="14"><li><code>/root/node_modules/moduleB/index.d.ts</code></li></ol><hr id="858deba1-90f7-4401-8c2d-cfa3df5a597c"/><ol type="1" id="4e409c82-4fb7-479d-afc3-b9902040e7b5" class="numbered-list" start="15"><li><code>/node_modules/moduleB.ts</code></li></ol><ol type="1" id="3e2f5e08-eaf8-4361-912b-cbddc9a43cb1" class="numbered-list" start="16"><li><code>/node_modules/moduleB.tsx</code></li></ol><ol type="1" id="3540c4af-589c-48ff-9cb6-3b14549f764c" class="numbered-list" start="17"><li><code>/node_modules/moduleB.d.ts</code></li></ol><ol type="1" id="24e95554-6ebb-43bf-81bd-99df825cfd3f" class="numbered-list" start="18"><li><code>/node_modules/moduleB/package.json</code> (如果指定了<code>&quot;types&quot;</code>属性)</li></ol><ol type="1" id="4c6f52e4-ea4d-449c-893b-2df191bc4d1e" class="numbered-list" start="19"><li><code>/node_modules/moduleB/index.ts</code></li></ol><ol type="1" id="90d0c562-15f2-4d4a-b72e-435abc6f096b" class="numbered-list" start="20"><li><code>/node_modules/moduleB/index.tsx</code></li></ol><ol type="1" id="d68d0ea8-df2d-46e6-9880-dce146dbd55a" class="numbered-list" start="21"><li><code>/node_modules/moduleB/index.d.ts</code></li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="efb5bb5f-8123-431e-b257-02016ddcb6d5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">TypeScript在步骤（8）和（15）会向上跳一级目录。</div></figure></details></li></ul></div></article></body></html>
