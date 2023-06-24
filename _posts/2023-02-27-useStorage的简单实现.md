@@ -6,7 +6,7 @@ author: "Vascent"
 header-img: "//w.wallhaven.cc/full/5g/wallhaven-5gylo8.jpg"
 tags:
   - hooks
-  - vue
+  - Vue
 ---
 
 # useStorage的简单实现
