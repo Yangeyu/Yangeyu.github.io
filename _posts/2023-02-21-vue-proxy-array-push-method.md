@@ -1,13 +1,12 @@
 ---
 layout: post
-title: "Vue.js响应式原理"
+title: "Vue.js响应式原理 - 数组拦截"
 subtitle: '了解 Vue.js 响应式原理 - Array.prototype.push'
 author: "Vascent"
 header-img: "//w.wallhaven.cc/full/k7/wallhaven-k7q9m7.png"
 <!-- header-style: text -->
 tags:
   - Vue
-  - Proxy
 ---
 
 ### Vue响应式原理-数组push的拦截
